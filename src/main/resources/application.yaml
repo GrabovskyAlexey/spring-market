@@ -1,0 +1,6 @@
+server:
+  port: 8081
+api:
+  version: 1
+  url: api/v${api.version}/
+
