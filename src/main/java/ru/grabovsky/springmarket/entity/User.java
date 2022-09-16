@@ -15,7 +15,9 @@ import java.util.Set;
 @Getter
 @Setter
 @ToString
+@Builder
 @RequiredArgsConstructor
+@AllArgsConstructor
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,8 +54,8 @@ public class User {
     @ToString.Exclude
     private Set<Review> reviews;
 
-    @OneToOne(mappedBy = "user")
-    private Profile profiles;
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Profile profile;
 
     @OneToMany(mappedBy = "user")
     @ToString.Exclude

@@ -101,11 +101,11 @@ CREATE TABLE profiles
 (
     user_id    bigint       NOT NULL,
     name       varchar(250) NOT NULL,
-    surname    varchar(250) NOT NULL,
+    surname    varchar(250),
     phone      varchar(250),
     city       varchar(250),
     birthday   date,
-    reg_date   date,
+    reg_date   date  NOT NULL,
     created_at timestamp DEFAULT (current_timestamp),
     updated_at timestamp DEFAULT (current_timestamp)
 );

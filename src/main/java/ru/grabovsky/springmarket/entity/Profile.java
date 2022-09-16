@@ -15,19 +15,21 @@ import java.util.Objects;
 @Getter
 @Setter
 @ToString
+@Builder
 @RequiredArgsConstructor
+@AllArgsConstructor
 public class Profile {
     @Id
     private Long id;
     @MapsId
-    @OneToOne(optional = false)
+    @OneToOne(optional = false, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     @Column(name = "name", nullable = false, length = 250)
     private String name;
 
-    @Column(name = "surname", nullable = false, length = 250)
+    @Column(name = "surname", length = 250)
     private String surname;
 
     @Column(name = "phone", length = 250)
@@ -39,7 +41,7 @@ public class Profile {
     @Column(name = "birthday")
     private LocalDate birthday;
 
-    @Column(name = "reg_date")
+    @Column(name = "reg_date", nullable = false)
     private LocalDate regDate;
 
     @CreationTimestamp

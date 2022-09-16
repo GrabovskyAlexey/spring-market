@@ -58,7 +58,7 @@ public class Product {
     @ToString.Exclude
     private Set<Item> items;
 
-    @OneToMany(mappedBy = "product")
+    @OneToMany
     @ToString.Exclude
     private Set<ProductImage> productImages;
 

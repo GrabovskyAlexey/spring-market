@@ -15,8 +15,12 @@ spring:
     change-log: classpath:db/changelog/db.changelog-master.yaml
   config:
     import: security.yaml
+logging:
+  level:
+    ru:
+      grabovsky: debug
 market:
   api:
     version: 1
-    url: api/v${market.api.version}/
+    url: api/v${market.api.version}
 
