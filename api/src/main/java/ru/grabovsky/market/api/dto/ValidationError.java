@@ -11,10 +11,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Schema(description = "Validation error info", name = "ValidationError")
 public class ValidationError {
-    @Schema(description = "Имя поля в котором возникла ошибка", example ="username")
+    @Schema(description = "Имя поля в котором возникла ошибка", example ="fieldName")
     @JsonProperty("fieldName")
     private String fieldName;
-    @Schema(description = "Сообщение об ошибке", example ="Username must not be null")
-    @JsonProperty("fieldName")
+
+    @Schema(description = "Сообщение об ошибке", example ="Field Name must not be null")
+    @JsonProperty("message")
     private String message;
 }

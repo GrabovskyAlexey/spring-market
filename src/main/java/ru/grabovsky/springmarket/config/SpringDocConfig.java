@@ -18,7 +18,7 @@ public class SpringDocConfig {
                                 .description("REST e-commerce application on Spring Framework")
                                 .version("1.0.0")
                 )
-                .addServersItem(new Server().url("http://localhost:8081/").description("dev"))
+                .addServersItem(new Server().url("http://localhost:8081").description("dev"))
                 ;
     }
 }

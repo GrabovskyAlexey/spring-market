@@ -1,4 +1,4 @@
-package ru.grabovsky.springmarket.exceptions;
+package ru.grabovsky.springmarket.exceptions.user;
 
 public class RoleNotFoundException extends RuntimeException {
 

@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.grabovsky.springmarket.entity.Authority;
 import ru.grabovsky.springmarket.entity.Role;
 import ru.grabovsky.springmarket.entity.User;
-import ru.grabovsky.springmarket.exceptions.UserNotFoundException;
+import ru.grabovsky.springmarket.exceptions.user.UserNotFoundException;
 import ru.grabovsky.springmarket.repositories.UserRepository;
 import ru.grabovsky.springmarket.services.interfaces.UserService;
 import ru.grabovsky.springmarket.utils.JwtTokenUtil;
