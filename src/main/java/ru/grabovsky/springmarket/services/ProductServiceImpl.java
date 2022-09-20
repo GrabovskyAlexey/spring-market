@@ -34,7 +34,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public PageDto<ProductDto> getPageProducts(Integer p, Integer limit) {
-        Pageable page = PageRequest.of(p, limit);
+        Pageable page = PageRequest.of(p - 1, limit);
         Page<Product> products = productRepository.findAll(page);
         return PageDto.<ProductDto>builder()
                 .first(products.isFirst())

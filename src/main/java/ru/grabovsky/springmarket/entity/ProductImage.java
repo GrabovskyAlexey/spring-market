@@ -27,6 +27,10 @@ public class ProductImage {
     @Column(name = "image_url", nullable = false, length = 250)
     private String imageUrl;
 
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
+
     @CreationTimestamp
     @Column(name = "created_at")
     private Instant createdAt;
@@ -34,7 +38,6 @@ public class ProductImage {
     @UpdateTimestamp
     @Column(name = "updated_at")
     private Instant updatedAt;
-
 
     @Override
     public boolean equals(Object o) {
