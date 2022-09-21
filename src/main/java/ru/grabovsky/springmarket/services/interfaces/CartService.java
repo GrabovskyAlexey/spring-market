@@ -1,7 +1,7 @@
 package ru.grabovsky.springmarket.services.interfaces;
 
-import ru.grabovsky.market.api.dto.CartDto;
-import ru.grabovsky.market.api.dto.CartItemDto;
+import ru.grabovsky.market.api.dto.cart.CartDto;
+import ru.grabovsky.market.api.dto.cart.CartItemDto;
 
 /**
  * Интерфейс CartService

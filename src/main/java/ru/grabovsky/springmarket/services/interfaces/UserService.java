@@ -1,7 +1,7 @@
 package ru.grabovsky.springmarket.services.interfaces;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
-import ru.grabovsky.springmarket.entity.User;
+import ru.grabovsky.springmarket.entity.auth.User;
 
 /**
  * Интерфейс UserService расширяющий UserDetailsService для работы Spring Security

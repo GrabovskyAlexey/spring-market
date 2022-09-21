@@ -5,11 +5,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.grabovsky.market.api.dto.MessageDto;
-import ru.grabovsky.market.api.dto.PageDto;
-import ru.grabovsky.market.api.dto.ProductDto;
+import ru.grabovsky.market.api.dto.util.MessageDto;
+import ru.grabovsky.market.api.dto.util.PageDto;
+import ru.grabovsky.market.api.dto.product.ProductDto;
 import ru.grabovsky.springmarket.controllers.interfaces.ProductController;
-import ru.grabovsky.springmarket.entity.Product;
+import ru.grabovsky.springmarket.entity.product.Product;
 import ru.grabovsky.springmarket.services.interfaces.ProductService;
 
 /**

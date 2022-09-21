@@ -5,10 +5,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.grabovsky.market.api.dto.AuthResponseDto;
-import ru.grabovsky.market.api.dto.RegisterRequestDto;
+import ru.grabovsky.market.api.dto.auth.AuthResponseDto;
+import ru.grabovsky.market.api.dto.register.RegisterRequestDto;
 import ru.grabovsky.springmarket.controllers.interfaces.RegisterController;
-import ru.grabovsky.springmarket.entity.User;
+import ru.grabovsky.springmarket.entity.auth.User;
 import ru.grabovsky.springmarket.services.interfaces.RegisterService;
 import ru.grabovsky.springmarket.services.interfaces.UserService;
 

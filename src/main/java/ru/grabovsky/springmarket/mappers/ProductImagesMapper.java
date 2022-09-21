@@ -1,8 +1,8 @@
 package ru.grabovsky.springmarket.mappers;
 
 import org.mapstruct.Mapper;
-import ru.grabovsky.market.api.dto.ProductImageDto;
-import ru.grabovsky.springmarket.entity.ProductImage;
+import ru.grabovsky.market.api.dto.product.ProductImageDto;
+import ru.grabovsky.springmarket.entity.product.ProductImage;
 
 /**
  * ProductImagesMapper

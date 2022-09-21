@@ -1,4 +1,4 @@
-package ru.grabovsky.springmarket.entity;
+package ru.grabovsky.springmarket.entity.category;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -7,29 +7,27 @@ import lombok.ToString;
 import org.hibernate.Hibernate;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import ru.grabovsky.springmarket.entity.product.Product;
 
 import javax.persistence.*;
 import java.time.Instant;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
-@Table(name = "product_images")
+@Table(name = "categories")
 @Getter
 @Setter
 @ToString
 @RequiredArgsConstructor
-public class ProductImage {
+public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "image_url", nullable = false, length = 250)
-    private String imageUrl;
-
-    @ManyToOne
-    @JoinColumn(name = "product_id")
-    private Product product;
+    @Column(name = "name", nullable = false, length = 250)
+    private String name;
 
     @CreationTimestamp
     @Column(name = "created_at")
@@ -39,12 +37,16 @@ public class ProductImage {
     @Column(name = "updated_at")
     private Instant updatedAt;
 
+    @OneToMany(mappedBy = "category")
+    @ToString.Exclude
+    private Set<Product> products;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        ProductImage that = (ProductImage) o;
-        return id != null && Objects.equals(id, that.id);
+        Category category = (Category) o;
+        return id != null && Objects.equals(id, category.id);
     }
 
     @Override

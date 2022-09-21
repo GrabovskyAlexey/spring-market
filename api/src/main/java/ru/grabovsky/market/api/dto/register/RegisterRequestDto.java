@@ -1,4 +1,4 @@
-package ru.grabovsky.market.api.dto;
+package ru.grabovsky.market.api.dto.register;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -18,7 +18,7 @@ public class RegisterRequestDto {
     private String username;
 
     @NotEmpty(message = "Пароль не может быть пустым")
-    @Size(min = 8, message = "Пароль должен быть не меньше 8 симовлов")
+    @Size(min = 8, message = "Пароль должен быть не меньше 8 символов")
     @Schema(description = "Пароль", example ="pa$$w0rd")
     @JsonProperty("password")
     private String password;

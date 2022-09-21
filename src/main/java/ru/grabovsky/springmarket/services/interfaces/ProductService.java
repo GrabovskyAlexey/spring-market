@@ -1,8 +1,8 @@
 package ru.grabovsky.springmarket.services.interfaces;
 
-import ru.grabovsky.market.api.dto.PageDto;
-import ru.grabovsky.market.api.dto.ProductDto;
-import ru.grabovsky.springmarket.entity.Product;
+import ru.grabovsky.market.api.dto.util.PageDto;
+import ru.grabovsky.market.api.dto.product.ProductDto;
+import ru.grabovsky.springmarket.entity.product.Product;
 
 /**
  * Интерфейс ProductService

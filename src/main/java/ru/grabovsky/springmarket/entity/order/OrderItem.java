@@ -1,4 +1,4 @@
-package ru.grabovsky.springmarket.entity;
+package ru.grabovsky.springmarket.entity.order;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -7,26 +7,30 @@ import lombok.ToString;
 import org.hibernate.Hibernate;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import ru.grabovsky.springmarket.entity.product.Product;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
-@Table(name = "categories")
+@Table(name = "items")
 @Getter
 @Setter
 @ToString
 @RequiredArgsConstructor
-public class Category {
+public class OrderItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "name", nullable = false, length = 250)
-    private String name;
+    @Column(name = "count", nullable = false)
+    private Integer count;
+
+    @Column(name = "price", nullable = false, precision = 10, scale = 2)
+    private BigDecimal price;
 
     @CreationTimestamp
     @Column(name = "created_at")
@@ -36,16 +40,22 @@ public class Category {
     @Column(name = "updated_at")
     private Instant updatedAt;
 
-    @OneToMany(mappedBy = "category")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "product_id", nullable = false)
     @ToString.Exclude
-    private Set<Product> products;
+    private Product product;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "order_id", nullable = false)
+    @ToString.Exclude
+    private Order order;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Category category = (Category) o;
-        return id != null && Objects.equals(id, category.id);
+        OrderItem orderItem = (OrderItem) o;
+        return id != null && Objects.equals(id, orderItem.id);
     }
 
     @Override

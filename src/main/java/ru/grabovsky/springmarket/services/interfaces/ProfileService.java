@@ -1,6 +1,6 @@
 package ru.grabovsky.springmarket.services.interfaces;
 
-import ru.grabovsky.springmarket.entity.Profile;
+import ru.grabovsky.springmarket.entity.auth.Profile;
 
 /**
  * Интерфейс ProfileService

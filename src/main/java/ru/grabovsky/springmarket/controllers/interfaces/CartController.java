@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import ru.grabovsky.market.api.dto.CartDto;
-import ru.grabovsky.market.api.dto.CartItemDto;
-import ru.grabovsky.market.api.dto.MessageDto;
+import ru.grabovsky.market.api.dto.cart.CartDto;
+import ru.grabovsky.market.api.dto.cart.CartItemDto;
+import ru.grabovsky.market.api.dto.util.MessageDto;
 
 import javax.validation.Valid;
 

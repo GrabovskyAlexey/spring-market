@@ -10,9 +10,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import ru.grabovsky.market.api.dto.AuthResponseDto;
-import ru.grabovsky.market.api.dto.MessageDto;
-import ru.grabovsky.market.api.dto.RegisterRequestDto;
+import ru.grabovsky.market.api.dto.auth.AuthResponseDto;
+import ru.grabovsky.market.api.dto.util.MessageDto;
+import ru.grabovsky.market.api.dto.register.RegisterRequestDto;
 
 import javax.validation.Valid;
 

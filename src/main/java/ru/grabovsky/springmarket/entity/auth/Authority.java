@@ -1,4 +1,4 @@
-package ru.grabovsky.springmarket.entity;
+package ru.grabovsky.springmarket.entity.auth;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

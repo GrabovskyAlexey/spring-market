@@ -11,8 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import ru.grabovsky.market.api.dto.CategoryDto;
-import ru.grabovsky.market.api.dto.MessageDto;
+import ru.grabovsky.market.api.dto.category.CategoryDto;
+import ru.grabovsky.market.api.dto.util.MessageDto;
 
 import javax.validation.Valid;
 import java.util.List;

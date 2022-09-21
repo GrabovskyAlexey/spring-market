@@ -10,9 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import ru.grabovsky.market.api.dto.MessageDto;
-import ru.grabovsky.market.api.dto.PageDto;
-import ru.grabovsky.market.api.dto.ProductDto;
+import ru.grabovsky.market.api.dto.util.MessageDto;
+import ru.grabovsky.market.api.dto.util.PageDto;
+import ru.grabovsky.market.api.dto.product.ProductDto;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;

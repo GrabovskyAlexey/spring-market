@@ -6,8 +6,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.grabovsky.market.api.dto.AuthRequestDto;
-import ru.grabovsky.market.api.dto.AuthResponseDto;
+import ru.grabovsky.market.api.dto.auth.AuthRequestDto;
+import ru.grabovsky.market.api.dto.auth.AuthResponseDto;
 import ru.grabovsky.springmarket.controllers.interfaces.AuthController;
 import ru.grabovsky.springmarket.services.interfaces.UserService;
 

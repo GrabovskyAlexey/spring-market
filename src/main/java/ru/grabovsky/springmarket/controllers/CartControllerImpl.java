@@ -3,8 +3,8 @@ package ru.grabovsky.springmarket.controllers;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.grabovsky.market.api.dto.CartDto;
-import ru.grabovsky.market.api.dto.CartItemDto;
+import ru.grabovsky.market.api.dto.cart.CartDto;
+import ru.grabovsky.market.api.dto.cart.CartItemDto;
 import ru.grabovsky.springmarket.controllers.interfaces.CartController;
 import ru.grabovsky.springmarket.services.interfaces.CartService;
 

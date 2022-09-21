@@ -1,9 +1,12 @@
-package ru.grabovsky.springmarket.entity;
+package ru.grabovsky.springmarket.entity.auth;
 
 import lombok.*;
 import org.hibernate.Hibernate;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import ru.grabovsky.springmarket.entity.order.DeliveryAddress;
+import ru.grabovsky.springmarket.entity.order.Order;
+import ru.grabovsky.springmarket.entity.review.Review;
 
 import javax.persistence.*;
 import java.time.Instant;

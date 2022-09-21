@@ -1,4 +1,4 @@
-package ru.grabovsky.market.api.dto;
+package ru.grabovsky.market.api.dto.cart;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -41,8 +41,16 @@ public class CartItemDto {
     @JsonProperty("totalPrice")
     private BigDecimal totalPrice;
 
+    /**
+     * Изменение количества товара и пересчет отбей стоимости
+     *
+     * @param delta Значение на которое изменить количество
+     */
     public void changeQuantity(int delta){
         quantity += delta;
+        if(quantity < 0){
+            quantity = 0;
+        }
         totalPrice = pricePerProduct.multiply(BigDecimal.valueOf(quantity));
     }
 }

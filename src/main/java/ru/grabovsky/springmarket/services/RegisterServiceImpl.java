@@ -3,10 +3,10 @@ package ru.grabovsky.springmarket.services;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import ru.grabovsky.market.api.dto.RegisterRequestDto;
-import ru.grabovsky.springmarket.entity.Profile;
-import ru.grabovsky.springmarket.entity.Role;
-import ru.grabovsky.springmarket.entity.User;
+import ru.grabovsky.market.api.dto.register.RegisterRequestDto;
+import ru.grabovsky.springmarket.entity.auth.Profile;
+import ru.grabovsky.springmarket.entity.auth.Role;
+import ru.grabovsky.springmarket.entity.auth.User;
 import ru.grabovsky.springmarket.exceptions.user.RoleNotFoundException;
 import ru.grabovsky.springmarket.exceptions.user.UserAlreadyExistsException;
 import ru.grabovsky.springmarket.services.interfaces.ProfileService;
@@ -35,7 +35,12 @@ public class RegisterServiceImpl implements RegisterService {
     private final RoleService roleService;
     private final ProfileService profileService;
 
-
+    /**
+     * Регистрация пользователя
+     *
+     * @param request Запрос на регистрацию
+     * @return Сущность зарегистрированного пользователя
+     */
     @Override
     public User register(RegisterRequestDto request) {
         checkExistsUsernameOrEmail(request);

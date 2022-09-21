@@ -5,9 +5,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import ru.grabovsky.market.api.dto.PageDto;
-import ru.grabovsky.market.api.dto.ProductDto;
-import ru.grabovsky.springmarket.entity.Product;
+import ru.grabovsky.market.api.dto.util.PageDto;
+import ru.grabovsky.market.api.dto.product.ProductDto;
+import ru.grabovsky.springmarket.entity.product.Product;
 import ru.grabovsky.springmarket.exceptions.IllegalJsonFieldValueException;
 import ru.grabovsky.springmarket.exceptions.products.ProductNotFoundException;
 import ru.grabovsky.springmarket.mappers.CategoryMapper;
@@ -32,6 +32,13 @@ public class ProductServiceImpl implements ProductService {
     private final ProductImagesMapper productImagesMapper;
     private final CategoryMapper categoryMapper;
 
+    /**
+     * Получение страницы продуктов
+     *
+     * @param p Номер страницы
+     * @param limit Элементов на страницу
+     * @return Страницу с продуктами
+     */
     @Override
     public PageDto<ProductDto> getPageProducts(Integer p, Integer limit) {
         Pageable page = PageRequest.of(p - 1, limit);
@@ -51,6 +58,12 @@ public class ProductServiceImpl implements ProductService {
                 .build();
     }
 
+    /**
+     * Поучение продукта по идентификатору
+     *
+     * @param id Идентификатор продукта
+     * @return DTO продукта
+     */
     @Override
     public ProductDto getProductById(Long id) {
         return productMapper.mapToDto(
@@ -62,12 +75,25 @@ public class ProductServiceImpl implements ProductService {
         );
     }
 
+    /**
+     * Добавление продукта
+     *
+     * @param productDto Продукт для добавления
+     * @return Добавленная сущность продукта
+     */
     @Override
     public Product addProduct(ProductDto productDto) {
         Product product = productMapper.mapFromDto(productDto);
         return productRepository.save(product);
     }
 
+    /**
+     * Обновление продукта
+     *
+     * @param id Идентификатор продукта для обновления
+     * @param productDto DTO обновленного продукта
+     * @return Обновленная сущность продукта
+     */
     @Override
     public Product updateProduct(Long id, ProductDto productDto) {
         if (productDto.getId() == null) {
@@ -93,6 +119,11 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.save(product);
     }
 
+    /**
+     * Удаление продукта
+     *
+     * @param id Идентификатор продукта для удаления
+     */
     @Override
     public void deleteProduct(Long id) {
         Product product = productRepository.findById(id)

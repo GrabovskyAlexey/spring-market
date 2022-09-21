@@ -1,4 +1,4 @@
-package ru.grabovsky.market.api.dto;
+package ru.grabovsky.market.api.dto.cart;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -35,17 +35,31 @@ public class CartDto {
     private BigDecimal totalSum;
 
 
+    /**
+     * Пересчет общей суммы корзины
+     *
+     */
     public void recalculate(){
+        deleteEmptyCartItems();
         totalSum = cartItems.stream()
                 .map(CartItemDto::getTotalPrice)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
+    /**
+     * Очистка корзины
+     *
+     */
     public void clear(){
         cartItems.clear();
         totalSum = BigDecimal.ZERO;
     }
 
+    /**
+     * Добавление товара в корзину
+     *
+     * @param itemDto Товар для добавления
+     */
     public void addItem(CartItemDto itemDto){
         for(CartItemDto item : cartItems){
             if(item.getProductId().equals(itemDto.getProductId())){
@@ -59,9 +73,22 @@ public class CartDto {
         recalculate();
     }
 
+    /**
+     * Удаление товара из корзины
+     *
+     * @param itemId Идентифкатор товара для удаления
+     */
     public void removeItem(Long itemId){
         if(cartItems.removeIf(i -> i.getProductId().equals(itemId))) {
             recalculate();
         }
+    }
+
+    /**
+     * Очистка корзины от товаров с количеством 0 или меньше
+     *
+     */
+    private void deleteEmptyCartItems(){
+        cartItems.removeIf(item -> item.getQuantity() <= 0);
     }
 }

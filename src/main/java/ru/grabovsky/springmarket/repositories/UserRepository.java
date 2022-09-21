@@ -2,7 +2,7 @@ package ru.grabovsky.springmarket.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import ru.grabovsky.springmarket.entity.User;
+import ru.grabovsky.springmarket.entity.auth.User;
 
 import java.util.Optional;
 

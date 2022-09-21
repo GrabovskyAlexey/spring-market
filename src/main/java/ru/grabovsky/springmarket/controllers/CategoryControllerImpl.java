@@ -5,10 +5,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.grabovsky.market.api.dto.CategoryDto;
-import ru.grabovsky.market.api.dto.MessageDto;
+import ru.grabovsky.market.api.dto.category.CategoryDto;
+import ru.grabovsky.market.api.dto.util.MessageDto;
 import ru.grabovsky.springmarket.controllers.interfaces.CategoryController;
-import ru.grabovsky.springmarket.entity.Category;
+import ru.grabovsky.springmarket.entity.category.Category;
 import ru.grabovsky.springmarket.services.interfaces.CategoryService;
 
 import java.util.List;

@@ -4,8 +4,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.springframework.beans.factory.annotation.Autowired;
-import ru.grabovsky.market.api.dto.CategoryDto;
-import ru.grabovsky.springmarket.entity.Category;
+import ru.grabovsky.market.api.dto.category.CategoryDto;
+import ru.grabovsky.springmarket.entity.category.Category;
 import ru.grabovsky.springmarket.exceptions.categories.CategoryNotFoundException;
 import ru.grabovsky.springmarket.repositories.CategoryRepository;
 

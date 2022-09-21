@@ -1,4 +1,4 @@
-package ru.grabovsky.springmarket.entity;
+package ru.grabovsky.springmarket.entity.review;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -7,29 +7,30 @@ import lombok.ToString;
 import org.hibernate.Hibernate;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import ru.grabovsky.springmarket.entity.auth.User;
+import ru.grabovsky.springmarket.entity.product.Product;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.Objects;
 
 @Entity
-@Table(name = "items")
+@Table(name = "reviews")
 @Getter
 @Setter
 @ToString
 @RequiredArgsConstructor
-public class Item {
+public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "count", nullable = false)
-    private Integer count;
+        @Column(name = "rating")
+    private Integer rating;
 
-    @Column(name = "price", nullable = false, precision = 10, scale = 2)
-    private BigDecimal price;
+    @Column(name = "review_text")
+    private String reviewText;
 
     @CreationTimestamp
     @Column(name = "created_at")
@@ -45,16 +46,16 @@ public class Item {
     private Product product;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "order_id", nullable = false)
+    @JoinColumn(name = "author_id", nullable = false)
     @ToString.Exclude
-    private Order order;
+    private User author;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Item item = (Item) o;
-        return id != null && Objects.equals(id, item.id);
+        Review review = (Review) o;
+        return id != null && Objects.equals(id, review.id);
     }
 
     @Override

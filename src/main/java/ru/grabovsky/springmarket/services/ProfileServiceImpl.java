@@ -2,7 +2,7 @@ package ru.grabovsky.springmarket.services;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.grabovsky.springmarket.entity.Profile;
+import ru.grabovsky.springmarket.entity.auth.Profile;
 import ru.grabovsky.springmarket.repositories.ProfileRepository;
 import ru.grabovsky.springmarket.services.interfaces.ProfileService;
 

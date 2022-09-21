@@ -3,7 +3,7 @@ package ru.grabovsky.springmarket.repositories;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Repository;
-import ru.grabovsky.market.api.dto.CartDto;
+import ru.grabovsky.market.api.dto.cart.CartDto;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package ru.grabovsky.springmarket.entity;
+package ru.grabovsky.springmarket.entity.product;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -11,37 +11,25 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.time.Instant;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
-@Table(name = "delivery_addresses")
+@Table(name = "product_images")
 @Getter
 @Setter
 @ToString
 @RequiredArgsConstructor
-public class DeliveryAddress {
+public class ProductImage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "country", nullable = false, length = 250)
-    private String country;
+    @Column(name = "image_url", nullable = false, length = 250)
+    private String imageUrl;
 
-    @Column(name = "city", nullable = false, length = 250)
-    private String city;
-
-    @Column(name = "region", length = 250)
-    private String region;
-
-    @Column(name = "street", length = 250)
-    private String street;
-
-    @Column(name = "house", length = 50)
-    private String house;
-
-    @Column(name = "flat")
-    private Integer flat;
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
 
     @CreationTimestamp
     @Column(name = "created_at")
@@ -51,20 +39,11 @@ public class DeliveryAddress {
     @Column(name = "updated_at")
     private Instant updatedAt;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "user_id", nullable = false)
-    @ToString.Exclude
-    private User user;
-
-    @OneToMany(mappedBy = "address")
-    @ToString.Exclude
-    private Set<Order> orders;
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        DeliveryAddress that = (DeliveryAddress) o;
+        ProductImage that = (ProductImage) o;
         return id != null && Objects.equals(id, that.id);
     }
 

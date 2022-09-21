@@ -1,6 +1,6 @@
 package ru.grabovsky.springmarket.services.interfaces;
 
-import ru.grabovsky.springmarket.entity.Role;
+import ru.grabovsky.springmarket.entity.auth.Role;
 
 import java.util.Optional;
 

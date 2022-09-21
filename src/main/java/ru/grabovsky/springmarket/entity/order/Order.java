@@ -1,4 +1,4 @@
-package ru.grabovsky.springmarket.entity;
+package ru.grabovsky.springmarket.entity.order;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -6,44 +6,33 @@ import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.Type;
 import org.hibernate.annotations.UpdateTimestamp;
+import ru.grabovsky.springmarket.entity.auth.User;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "products")
+@Table(name = "orders")
 @Getter
 @Setter
 @ToString
 @RequiredArgsConstructor
-public class Product {
+public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "title", nullable = false, length = 250)
-    private String title;
-
-    @Column(name = "description")
-    @Type(type = "org.hibernate.type.TextType")
-    private String description;
-
-    @Column(name = "price", precision = 10, scale = 2)
-    private BigDecimal price;
-
-    @Column(name = "rating", precision = 3, scale = 2)
-    private BigDecimal rating;
-
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "category_id", nullable = false)
+    @JoinColumn(name = "address_id", nullable = false)
     @ToString.Exclude
-    private Category category;
+    private DeliveryAddress address;
+
+    @Column(name = "order_status", nullable = false)
+    private String orderStatus;
 
     @CreationTimestamp
     @Column(name = "created_at")
@@ -53,24 +42,21 @@ public class Product {
     @Column(name = "updated_at")
     private Instant updatedAt;
 
-    @OneToMany(mappedBy = "product")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
     @ToString.Exclude
-    private Set<Review> reviews;
+    private User user;
 
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "order")
     @ToString.Exclude
-    private Set<Item> items;
-
-    @OneToMany(mappedBy = "product")
-    @ToString.Exclude
-    private Set<ProductImage> productImages;
+    private Set<OrderItem> orderItems;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Product product = (Product) o;
-        return id != null && Objects.equals(id, product.id);
+        Order order = (Order) o;
+        return id != null && Objects.equals(id, order.id);
     }
 
     @Override

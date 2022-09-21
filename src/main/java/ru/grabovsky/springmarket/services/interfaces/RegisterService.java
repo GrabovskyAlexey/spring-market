@@ -1,7 +1,7 @@
 package ru.grabovsky.springmarket.services.interfaces;
 
-import ru.grabovsky.market.api.dto.RegisterRequestDto;
-import ru.grabovsky.springmarket.entity.User;
+import ru.grabovsky.market.api.dto.register.RegisterRequestDto;
+import ru.grabovsky.springmarket.entity.auth.User;
 
 /**
  * Интерфейс RegisterService

@@ -1,4 +1,4 @@
-package ru.grabovsky.springmarket.entity;
+package ru.grabovsky.springmarket.entity.order;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -7,28 +7,42 @@ import lombok.ToString;
 import org.hibernate.Hibernate;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import ru.grabovsky.springmarket.entity.auth.User;
 
 import javax.persistence.*;
 import java.time.Instant;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
-@Table(name = "reviews")
+@Table(name = "delivery_addresses")
 @Getter
 @Setter
 @ToString
 @RequiredArgsConstructor
-public class Review {
+public class DeliveryAddress {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
-        @Column(name = "rating")
-    private Integer rating;
+    @Column(name = "country", nullable = false, length = 250)
+    private String country;
 
-    @Column(name = "review_text")
-    private String reviewText;
+    @Column(name = "city", nullable = false, length = 250)
+    private String city;
+
+    @Column(name = "region", length = 250)
+    private String region;
+
+    @Column(name = "street", length = 250)
+    private String street;
+
+    @Column(name = "house", length = 50)
+    private String house;
+
+    @Column(name = "flat")
+    private Integer flat;
 
     @CreationTimestamp
     @Column(name = "created_at")
@@ -39,21 +53,20 @@ public class Review {
     private Instant updatedAt;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "product_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     @ToString.Exclude
-    private Product product;
+    private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "author_id", nullable = false)
+    @OneToMany(mappedBy = "address")
     @ToString.Exclude
-    private User author;
+    private Set<Order> orders;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Review review = (Review) o;
-        return id != null && Objects.equals(id, review.id);
+        DeliveryAddress that = (DeliveryAddress) o;
+        return id != null && Objects.equals(id, that.id);
     }
 
     @Override

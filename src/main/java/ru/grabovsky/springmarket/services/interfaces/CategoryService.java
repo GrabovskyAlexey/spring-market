@@ -1,7 +1,7 @@
 package ru.grabovsky.springmarket.services.interfaces;
 
-import ru.grabovsky.market.api.dto.CategoryDto;
-import ru.grabovsky.springmarket.entity.Category;
+import ru.grabovsky.market.api.dto.category.CategoryDto;
+import ru.grabovsky.springmarket.entity.category.Category;
 
 import java.util.List;
 

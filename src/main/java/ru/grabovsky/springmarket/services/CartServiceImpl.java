@@ -5,8 +5,8 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
-import ru.grabovsky.market.api.dto.CartDto;
-import ru.grabovsky.market.api.dto.CartItemDto;
+import ru.grabovsky.market.api.dto.cart.CartDto;
+import ru.grabovsky.market.api.dto.cart.CartItemDto;
 import ru.grabovsky.springmarket.repositories.CartRepository;
 import ru.grabovsky.springmarket.services.interfaces.CartService;
 
@@ -20,13 +20,26 @@ import ru.grabovsky.springmarket.services.interfaces.CartService;
 @RequiredArgsConstructor
 public class CartServiceImpl implements CartService {
     private final CartRepository repository;
-
+    // TODO: реализовать обновление цены товара при изменениях в корзине с запросом из БД/Кеша
+    /**
+     * Получить корзину по id
+     *
+     * @param cartId Идентификатор корзины
+     * @return DTO корзины
+     */
     @Override
     @Cacheable(value = "userCart", key = "#cartId")
     public CartDto getCart(String cartId) {
         return repository.getCartById(cartId);
     }
 
+    /**
+     * Добавить товар в корзину
+     *
+     * @param cartId Идентификатор корзины
+     * @param itemDto Товар для добавления в корзину
+     * @return DTO корзины
+     */
     @Override
     @CachePut(value = "userCart", key = "#cartId")
     public CartDto addProductToCart(String cartId, CartItemDto itemDto) {
@@ -35,6 +48,13 @@ public class CartServiceImpl implements CartService {
         return cart;
     }
 
+    /**
+     * Удалить товар из корзины
+     *
+     * @param cartId Идентификатор корзины
+     * @param itemId Идентификатор товара для удаления
+     * @return DTO корзины
+     */
     @Override
     @CachePut(value = "userCart", key = "#cartId")
     public CartDto deleteProductFromCartById(String cartId, Long itemId) {
@@ -43,6 +63,14 @@ public class CartServiceImpl implements CartService {
         return cart;
     }
 
+    /**
+     * Изменить количество товара в корзине
+     *
+     * @param cartId Идентификатор корзины
+     * @param itemId Идентификатор товара для изменения количества
+     * @param delta На сколько изменить количество
+     * @return DTO корзины
+     */
     @Override
     @CachePut(value = "userCart", key = "#cartId")
     public CartDto changeQuantity(String cartId, Long itemId, int delta) {
@@ -57,6 +85,11 @@ public class CartServiceImpl implements CartService {
         return cart;
     }
 
+    /**
+     * Очистить корзину
+     *
+     * @param cartId Идентификатор корзины
+     */
     @Override
     @CacheEvict(value = "userCart", key = "#cartId")
     public void clear(String cartId) {
