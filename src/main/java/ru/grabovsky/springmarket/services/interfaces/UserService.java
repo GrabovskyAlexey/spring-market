@@ -42,6 +42,21 @@ public interface UserService extends UserDetailsService {
     User findByEmail(String email);
 
     /**
+     * Поиск пользователя по имени пользователя
+     *
+     * @param username Имя пользователя
+     * @return Пользователь
+     */
+    User findByUsername(String username);
+
+    /**
+     * Поиск пользователя по идентификатору
+     *
+     * @param id Идентификатор пользователя
+     * @return Пользователь
+     */
+    User getUserById(Long id);
+    /**
      * Сохраняет пользователя в БД
      *
      * @param user Пользователь для сохранения

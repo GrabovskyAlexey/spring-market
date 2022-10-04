@@ -97,6 +97,24 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username).orElseThrow(
+                ()-> new UserNotFoundException(
+                        String.format("Пользователь с именем пользователя '%s' не найден", username)
+                )
+        );
+    }
+
+    @Override
+    public User getUserById(Long id) {
+        return userRepository.findById(id).orElseThrow(
+                ()-> new UserNotFoundException(
+                        String.format("Пользователь с идентификатором '%s' не найден", id)
+                )
+        );
+    }
+
+    @Override
     public void save(User user) {
         userRepository.save(user);
     }

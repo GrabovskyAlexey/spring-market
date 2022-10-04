@@ -11,38 +11,35 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import ru.grabovsky.market.api.dto.order.OrderDto;
+import ru.grabovsky.market.api.dto.order.DeliveryAddressDto;
 import ru.grabovsky.market.api.dto.util.MessageDto;
-import ru.grabovsky.market.api.dto.util.PageDto;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Positive;
 import java.security.Principal;
+import java.util.List;
 
 /**
- * Интерфейс OrderController с аннотациями для генерации OpenApi документации
+ * Интерфейс AddressController с аннотациями для генерации OpenApi документации
  *
  * @author grabovsky.alexey
- * @created 20.09.2022 18:20
+ * @created 23.09.2022 16:13
  */
 @Validated
-@Tag(name = "order", description = "Order api")
-public interface OrderController {
+@Tag(name = "address", description = "User delivery address api")
+public interface AddressController {
     /**
-     * GET /${market.api.url}/orders : Get all user orders
+     * GET /${market.api.url}/addresses : Get all user addresses
      *
      * @param principal UserDetails
-     * @param p        Page index
-     * @param limit    Limit orders per page
-     * @return Page or user orders (status code 200)
+     * @return List of user addresses (status code 200)
      * or Unauthorized (status code 401)
      */
     @Operation(
-            operationId = "getAllOrdersByUsername",
-            summary = "Get all user orders",
-            tags = {"order"},
+            operationId = "getAllAddressesByUsername",
+            summary = "Get all user addresses",
+            tags = {"address"},
             responses = {
-                    @ApiResponse(responseCode = "200", description = "Page of user orders", useReturnTypeSchema = true),
+                    @ApiResponse(responseCode = "200", description = "List of user addresses", useReturnTypeSchema = true),
                     @ApiResponse(responseCode = "401", description = "Unauthorized")
             },
             security = @SecurityRequirement(name = "bearer")
@@ -50,37 +47,31 @@ public interface OrderController {
     @GetMapping(
             produces = {"application/json"}
     )
-    ResponseEntity<PageDto<OrderDto>> getAllOrdersByUsername(
-            @Parameter(hidden = true) Principal principal,
-            @Parameter(name = "p", description = "Page index")
-            @RequestParam(value = "p", defaultValue = "1", name = "p")
-            @Positive(message = "Значение должно быть больше 0") Integer p,
-            @Parameter(name = "limit", description = "Limit orders per page")
-            @RequestParam(value = "limit", defaultValue = "25")
-            @Positive(message = "Значение должно быть больше 0") Integer limit
+    ResponseEntity<List<DeliveryAddressDto>> getAllAddressesByUsername(
+            @Parameter(hidden = true) Principal principal
     );
 
     /**
-     * GET /${market.api.url}/orders/{id} : Get order by id
+     * GET /${market.api.url}/addresses/{id} : Get address by id
      *
      * @param principal UserDetails
-     * @param id Order id
-     * @return Order (status code 200)
+     * @param id Address id
+     * @return Address (status code 200)
      * or Unauthorized (status code 401)
      * or Forbidden (status code 403)
      * or Not Found (status code 404)
      */
     @Operation(
-            operationId = "getOrderById",
-            summary = "Get order by id",
-            tags = {"order"},
+            operationId = "getaAddressById",
+            summary = "Get Address by id",
+            tags = {"address"},
             responses = {
-                    @ApiResponse(responseCode = "200", description = "Order", content = {
-                            @Content(mediaType = "application/json", schema = @Schema(implementation = OrderDto.class))
+                    @ApiResponse(responseCode = "200", description = "Delivery address", content = {
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = DeliveryAddressDto.class))
                     }),
                     @ApiResponse(responseCode = "401", description = "Unauthorized"),
                     @ApiResponse(responseCode = "403", description = "Forbidden"),
-                    @ApiResponse(responseCode = "404", description = "Order not found", content = {
+                    @ApiResponse(responseCode = "404", description = "Address not found", content = {
                             @Content(mediaType = "application/json", schema = @Schema(implementation = MessageDto.class))
                     })
             },
@@ -90,25 +81,25 @@ public interface OrderController {
             value = "/{id}",
             produces = {"application/json"}
     )
-    ResponseEntity<OrderDto> getOrderById(
+    ResponseEntity<DeliveryAddressDto> getaAddressById(
             @Parameter(hidden = true) Principal principal,
-            @Parameter(name = "id", description = "Order id", required = true) @PathVariable("id") Long id
+            @Parameter(name = "id", description = "Address id", required = true) @PathVariable("id") Long id
     );
 
     /**
-     * POST /${market.api.url}/orders : Create order
+     * POST /${market.api.url}/addresses : Create address
      *
      * @param principal UserDetails
-     * @param dto User order
-     * @return Information about created order (status code 200)
+     * @param dto User address
+     * @return Information about created address (status code 200)
      * or Unauthorized (status code 401)
      */
     @Operation(
-            operationId = "createOrder",
-            summary = "Create order",
-            tags = {"order"},
+            operationId = "createAddress",
+            summary = "Create address",
+            tags = {"address"},
             responses = {
-                    @ApiResponse(responseCode = "200", description = "Order", content = {
+                    @ApiResponse(responseCode = "200", description = "Delivery address", content = {
                             @Content(mediaType = "application/json", schema = @Schema(implementation = MessageDto.class))
                     }),
                     @ApiResponse(responseCode = "401", description = "Unauthorized"),
@@ -120,26 +111,28 @@ public interface OrderController {
             consumes = {"application/json"}
     )
     @ResponseStatus(HttpStatus.CREATED)
-    ResponseEntity<MessageDto> createOrder(
+    ResponseEntity<MessageDto> createAddress(
             @Parameter(hidden = true) Principal principal,
-            @Parameter(name = "order", description = "Order", required = true) @Valid @RequestBody OrderDto dto
+            @Parameter(name = "address", description = "Delivery Address", required = true) @Valid @RequestBody DeliveryAddressDto dto
     );
 
     /**
-     * PUT /${market.api.url}/orders/{id} : Update order by id
+     * PUT /${market.api.url}/addresses/{id} : Update address by id
      *
-     * @param id Order id
-     * @return Information about updated order (status code 200)
+     * @param principal UserDetails
+     * @param id Address id
+     * @param dto Delivery address dto
+     * @return Information about updated address (status code 200)
      * or Unauthorized (status code 401)
      * or Forbidden (status code 403)
      * or Not Found (status code 404)
      */
     @Operation(
-            operationId = "updateOrderById",
-            summary = "Update order by id",
-            tags = {"order"},
+            operationId = "updateAddressById",
+            summary = "Update address by id",
+            tags = {"address"},
             responses = {
-                    @ApiResponse(responseCode = "200", description = "Order", content = {
+                    @ApiResponse(responseCode = "200", description = "Delivery address", content = {
                             @Content(mediaType = "application/json", schema = @Schema(implementation = MessageDto.class))
                     }),
                     @ApiResponse(responseCode = "401", description = "Unauthorized"),
@@ -155,13 +148,14 @@ public interface OrderController {
             produces = {"application/json"},
             consumes = {"application/json"}
     )
-    ResponseEntity<MessageDto> updateOrderById(
-            @Parameter(name = "id", description = "Order id", required = true) @PathVariable("id") Long id,
-            @Parameter(name = "order", description = "Order", required = true) @Valid @RequestBody OrderDto order
+    ResponseEntity<MessageDto> updateAddressById(
+            @Parameter(hidden = true) Principal principal,
+            @Parameter(name = "id", description = "Address id", required = true) @PathVariable("id") Long id,
+            @Parameter(name = "address", description = "Delivery Address", required = true) @Valid @RequestBody DeliveryAddressDto dto
     );
 
     /**
-     * DELETE /${market.api.url}/orders/{id} : Delete order by id
+     * DELETE /${market.api.url}/addresses/{id} : Delete address by id
      *
      * @param id Order id
      * @return Message (status code 200)
@@ -170,16 +164,16 @@ public interface OrderController {
      * or Not Found (status code 404)
      */
     @Operation(
-            operationId = "deleteOrderById",
-            summary = "Delete order by id",
-            tags = {"order"},
+            operationId = "deleteAddressById",
+            summary = "Delete address by id",
+            tags = {"address"},
             responses = {
                     @ApiResponse(responseCode = "200", description = "Message info", content = {
                             @Content(mediaType = "application/json", schema = @Schema(implementation = MessageDto.class))
                     }),
                     @ApiResponse(responseCode = "401", description = "Unauthorized"),
                     @ApiResponse(responseCode = "403", description = "Forbidden"),
-                    @ApiResponse(responseCode = "404", description = "Order not found", content = {
+                    @ApiResponse(responseCode = "404", description = "Address not found", content = {
                             @Content(mediaType = "application/json", schema = @Schema(implementation = MessageDto.class))
                     })
             },
@@ -189,7 +183,7 @@ public interface OrderController {
             value = "/{id}",
             produces = {"application/json"}
     )
-    ResponseEntity<MessageDto> deleteOrderById(
-            @Parameter(name = "id", description = "Order id", required = true) @PathVariable("id") Long id
+    ResponseEntity<MessageDto> deleteAddressById(
+            @Parameter(name = "id", description = "Address id", required = true) @PathVariable("id") Long id
     );
 }

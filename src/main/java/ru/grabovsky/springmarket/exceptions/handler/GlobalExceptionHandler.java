@@ -2,6 +2,7 @@ package ru.grabovsky.springmarket.exceptions.handler;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -64,6 +65,12 @@ public class GlobalExceptionHandler {
         List<ValidationError> errors = new ArrayList<>();
         errors.add(new ValidationError(e.getFiledName(), e.getErrorMessage()));
         return new ValidationErrorResponseDto(errors);
+    }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public MessageDto onAccessDeniedException(AccessDeniedException e) {
+        return new MessageDto(e.getMessage());
     }
 
 }

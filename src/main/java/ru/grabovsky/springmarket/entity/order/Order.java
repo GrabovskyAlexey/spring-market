@@ -1,15 +1,14 @@
 package ru.grabovsky.springmarket.entity.order;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.Hibernate;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import ru.grabovsky.market.api.dto.order.OrderStatus;
 import ru.grabovsky.springmarket.entity.auth.User;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.Objects;
 import java.util.Set;
@@ -19,20 +18,25 @@ import java.util.Set;
 @Getter
 @Setter
 @ToString
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "address_id", nullable = false)
     @ToString.Exclude
     private DeliveryAddress address;
 
     @Column(name = "order_status", nullable = false)
-    private String orderStatus;
+    @Enumerated(EnumType.STRING)
+    private OrderStatus orderStatus;
+
+    @Column(name = "total_sum", nullable = false, precision = 10, scale = 2)
+    private BigDecimal totalSum;
 
     @CreationTimestamp
     @Column(name = "created_at")
@@ -47,7 +51,7 @@ public class Order {
     @ToString.Exclude
     private User user;
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", cascade = CascadeType.PERSIST)
     @ToString.Exclude
     private Set<OrderItem> orderItems;
 

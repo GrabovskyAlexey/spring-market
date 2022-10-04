@@ -51,6 +51,7 @@ CREATE TABLE orders
     user_id      bigint                NOT NULL,
     address_id   bigint                NOT NULL,
     order_status text                  NOT NULL,
+    total_sum      numeric(10,2)            NOT NULL,
     created_at   timestamp DEFAULT (current_timestamp),
     updated_at   timestamp DEFAULT (current_timestamp)
 );
@@ -61,8 +62,9 @@ CREATE TABLE items
     id         bigserial PRIMARY KEY NOT NULL,
     product_id bigint                NOT NULL,
     order_id bigint                NOT NULL,
-    count      int                   NOT NULL,
-    price      numeric(10,2)            NOT NULL,
+    quantity      int                   NOT NULL,
+    price_per_product      numeric(10,2)            NOT NULL,
+    total_price      numeric(10,2)            NOT NULL,
     created_at timestamp DEFAULT (current_timestamp),
     updated_at timestamp DEFAULT (current_timestamp)
 );

@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -107,7 +108,8 @@ public interface CategoryController {
                     }),
                     @ApiResponse(responseCode = "401", description = "Unauthorized"),
                     @ApiResponse(responseCode = "403", description = "Forbidden"),
-            }
+            },
+            security = @SecurityRequirement(name="bearer")
     )
     @PostMapping(
             produces = {"application/json"},
@@ -144,7 +146,8 @@ public interface CategoryController {
                     @ApiResponse(responseCode = "404", description = "Category not found", content = {
                             @Content(mediaType = "application/json", schema = @Schema(implementation = MessageDto.class))
                     })
-            }
+            },
+            security = @SecurityRequirement(name="bearer")
     )
     @PutMapping(
             produces = {"application/json"},
@@ -181,7 +184,8 @@ public interface CategoryController {
                     @ApiResponse(responseCode = "404", description = "Category not found", content = {
                             @Content(mediaType = "application/json", schema = @Schema(implementation = MessageDto.class))
                     })
-            }
+            },
+            security = @SecurityRequirement(name="bearer")
     )
     @DeleteMapping(
             value = "/{id}",
